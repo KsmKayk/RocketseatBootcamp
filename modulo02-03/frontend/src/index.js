@@ -1,5 +1,5 @@
-const test = (a, b) => {
-  return a + b
-}
+import React from 'react';
+import {render} from 'react-dom';
+import App from './App';
 
-console.log(test(1, 2))
+render(<App></App>, document.getElementById("app"))
