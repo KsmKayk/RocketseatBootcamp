@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+modulo06-07-08-09/backend/tmp/*
+!modulo06-07-08-09/backend/tmp/.gitkeep
