@@ -1,4 +1,6 @@
 import "reflect-metadata";
+import "@shared/infra/typeorm";
+import "@shared/container";
 
 import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
@@ -6,8 +8,6 @@ import "express-async-errors";
 import routes from "./routes";
 import uploadConfig from "@config/upload";
 import AppError from "@shared/errors/AppError";
-
-import "../typeorm";
 
 const app = express();
 app.use(cors());
