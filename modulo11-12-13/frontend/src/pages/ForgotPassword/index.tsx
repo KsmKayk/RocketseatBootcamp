@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useRef, useCallback, useState } from 'react';
 import { FiLogIn, FiMail } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
@@ -18,7 +18,6 @@ import api from '../../services/api';
 
 interface ForgotPasswordFormData {
   email: string;
-  password: string;
 }
 
 const ForgotPassword: React.FC = () => {
@@ -36,15 +35,13 @@ const ForgotPassword: React.FC = () => {
 
         const schema = Yup.object().shape({
           email: Yup.string()
-            .email('Digite um e-mail válido')
-            .required('E-mail obrigatório'),
+            .required('E-mail obrigatório')
+            .email('Digite um e-mail válido'),
         });
 
         await schema.validate(data, {
           abortEarly: false,
         });
-
-        // recuperação de senha
 
         await api.post('/password/forgot', {
           email: data.email,
@@ -56,8 +53,6 @@ const ForgotPassword: React.FC = () => {
           description:
             'Enviamos um e-mail para confirmar a recuperação de senha, cheque sua caixa de entrada',
         });
-
-        // history.push('/dashboard');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);

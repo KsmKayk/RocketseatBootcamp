@@ -13,7 +13,7 @@ import { Container, Error } from './styles';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
-  containerStyle?: React.CSSProperties;
+  containerStyle?: object;
   icon?: React.ComponentType<IconBaseProps>;
 }
 
@@ -24,6 +24,7 @@ const Input: React.FC<InputProps> = ({
   ...rest
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
+
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
 
@@ -51,8 +52,9 @@ const Input: React.FC<InputProps> = ({
     <Container
       style={containerStyle}
       isErrored={!!error}
-      isFocused={isFocused}
       isFilled={isFilled}
+      isFocused={isFocused}
+      data-testid="input-container"
     >
       {Icon && <Icon size={20} />}
       <input
@@ -61,8 +63,8 @@ const Input: React.FC<InputProps> = ({
         defaultValue={defaultValue}
         ref={inputRef}
         {...rest}
-        type="text"
       />
+
       {error && (
         <Error title={error}>
           <FiAlertCircle color="#c53030" size={20} />

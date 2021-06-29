@@ -1,5 +1,4 @@
-import React, { createContext, useCallback, useContext, useState } from 'react';
-
+import React, { createContext, useCallback, useState, useContext } from 'react';
 import api from '../services/api';
 
 interface User {
@@ -42,6 +41,13 @@ const AuthProvider: React.FC = ({ children }) => {
     return {} as AuthState;
   });
 
+  const signOut = useCallback(() => {
+    localStorage.removeItem('@GoBarber:token');
+    localStorage.removeItem('@GoBarber:user');
+
+    setData({} as AuthState);
+  }, []);
+
   const signIn = useCallback(async ({ email, password }) => {
     const response = await api.post('sessions', {
       email,
@@ -58,13 +64,6 @@ const AuthProvider: React.FC = ({ children }) => {
     setData({ token, user });
   }, []);
 
-  const signOut = useCallback(() => {
-    localStorage.removeItem('@GoBarber:token');
-    localStorage.removeItem('@GoBarber:user');
-
-    setData({} as AuthState);
-  }, []);
-
   const updateUser = useCallback(
     (user: User) => {
       localStorage.setItem('@GoBarber:user', JSON.stringify(user));
@@ -74,7 +73,7 @@ const AuthProvider: React.FC = ({ children }) => {
         user,
       });
     },
-    [data.token],
+    [setData, data.token],
   );
 
   return (
@@ -88,10 +87,6 @@ const AuthProvider: React.FC = ({ children }) => {
 
 function useAuth(): AuthContextData {
   const context = useContext(AuthContext);
-
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
 
   return context;
 }

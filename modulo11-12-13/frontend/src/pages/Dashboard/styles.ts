@@ -118,12 +118,12 @@ export const NextAppointment = styled.div`
     position: relative;
 
     &::before {
-      content: '';
       position: absolute;
       height: 80%;
       width: 1px;
       left: 0;
       top: 10%;
+      content: '';
       background: #ff9000;
     }
 
@@ -131,7 +131,6 @@ export const NextAppointment = styled.div`
       width: 80px;
       height: 80px;
       border-radius: 50%;
-      background: #ff9000;
     }
 
     strong {
@@ -197,7 +196,7 @@ export const Appointment = styled.div`
     background: #3e3b47;
     display: flex;
     align-items: center;
-    padding: 16px;
+    padding: 16px 24px;
     border-radius: 10px;
     margin-left: 24px;
 
@@ -205,14 +204,12 @@ export const Appointment = styled.div`
       width: 56px;
       height: 56px;
       border-radius: 50%;
-      background: #ff9000;
     }
 
     strong {
-      margin-left: 16px;
-      color: #f4ede8;
+      margin-left: 24px;
+      color: #fff;
       font-size: 20px;
-      font-weight: 500;
     }
   }
 `;
